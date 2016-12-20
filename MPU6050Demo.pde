@@ -31,6 +31,8 @@ ToxiclibsSupport gfx;
     float[] velocity=new float[3];
     float[] preVelocity=new float[3];
     float[] a_off =new float[3];
+    float[] ac = new float[3];
+    float[] v_n = new float[3];
     int count = 1; 
     float ax_off, ay_off, az_off; 
     int counter = 0;

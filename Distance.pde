@@ -6,15 +6,16 @@
 // thr-# 15.12.2016 
 
 void position() {
-  float[] ac = new float[3];
-  ac[1] = filter_X.update(value[3]/16348); // x 
-  ac[0] = filter_Y.update(value[4]/16348); // y
+  ac[0] = filter_X.update(value[3]/16348); // x 
+  ac[1] = -filter_Y.update(value[4]/16348); // y
   ac[2] = filter_Z.update(value[5]/16348); // z
     
   for (i=0; i < 3; i++ ) {
-  velocity[i] = 0.25*ac[i]*pow(deltaTime,2 ); //1000 added to get the same units
-  pos[i] = pos[i] + 0.5 * (preVelocity[i] + velocity[i]) * deltaTime ; // + (0.5*ac[i])*(pow(deltaTime,2)); //  velocity[i]*deltaTime;                     
-  preVelocity[i] = velocity[i];      
+   
+  velocity[i] = v_n[i] + ac[i]*deltaTime; 
+  pos[i] = pos[i] +  velocity[i] * deltaTime ; // + (0.5*ac[i])*(pow(deltaTime,2)); //  velocity[i]*deltaTime;                     
+  v_n[i] =  ac[i] * deltaTime;
+  //preVelocity[i] = velocity[i];      
   }       
 // println(); 
 }       
