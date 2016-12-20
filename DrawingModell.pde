@@ -66,6 +66,7 @@ void drawboard() {
   translate(0,5,0);
   rotateX(3*HALF_PI);
   image(img2, 0, 0);
+  // rotateZ(PI);
   popMatrix();
   
   

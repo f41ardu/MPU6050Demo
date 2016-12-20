@@ -13,18 +13,18 @@ void serialEvent(Serial myPort) {
           value[i]=float (msg[i]);
         }
         for (int i=3; i<6; i++ ) {
-         value[i]=0.0; //float (msg[i]);
-          a_off[i-3] =+ value[i-3];
-         }
+          // value[i]=0.0; //float (msg[i]);
+          a_off[i-3] =+ value[i];
+         }  
         
-        ax_off = a_off[2]/count; 
-        ay_off = a_off[0]/count; 
-        az_off = a_off[1]/count; 
+        ax_off = a_off[0]/count;   
+        ay_off = a_off[1]/count; 
+        az_off = a_off[2]/count; 
         count++; 
         println(ax_off +"," + ay_off +"," + az_off);
         // value[5]=value[5];
         // arduino liefert ms
-        deltaTime=abs(value[6]-timePrev);
+        deltaTime=abs(value[6]-timePrev);                    
         timePrev=value[6];
       }
     }

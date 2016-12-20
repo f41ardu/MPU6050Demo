@@ -12,9 +12,9 @@ void position() {
   ac[2] = filter_Z.update(value[5]/16348); // z
     
   for (i=0; i < 3; i++ ) {
-  velocity[i] = 0.5*ac[i]*pow(deltaTime,1); //1000 added to get the same units
-  pos[i] = pos[i] + 0.5*(preVelocity[i]+ velocity[i])*deltaTime ; // + (0.5*ac[i])*(pow(deltaTime,2)); //  velocity[i]*deltaTime;                     
+  velocity[i] = 0.25*ac[i]*pow(deltaTime,2 ); //1000 added to get the same units
+  pos[i] = pos[i] + 0.5 * (preVelocity[i] + velocity[i]) * deltaTime ; // + (0.5*ac[i])*(pow(deltaTime,2)); //  velocity[i]*deltaTime;                     
   preVelocity[i] = velocity[i];      
-  }  
-// println();
+  }       
+// println(); 
 }       

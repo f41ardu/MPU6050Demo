@@ -3,7 +3,7 @@
 // It use OUTPUT_READABLE_YAWPITCHROLL and OUTPUT_READABLE_WORLDACCEL 
 // thr-# 15.12.2016 
 // use Use myMPU6050Demo3Kalman_2 with local offsets
-// version 0.1.1 
+// version 0.1.2 
 // correct yaw,pitch, roll angels (gimbal lock) 
 import processing.serial.*;
 import processing.opengl.*;
@@ -48,9 +48,9 @@ ToxiclibsSupport gfx;
       img2.resize(200, 100);
       imageMode(CENTER);
     
-      filter_X=new Kalman(.1,.1,.001,.0000001);
-      filter_Y=new Kalman(.1,.1,.001,.0000001);
-      filter_Z=new Kalman(.1,.1,.001,.0000001);
+      filter_X=new Kalman(.1,.1,.1,100.01);
+      filter_Y=new Kalman(.1,.1,.1,100.01);
+      filter_Z=new Kalman(.1,.1,.1,100.01);
     
       String portName = Serial.list()[1];
       myPort = new Serial(this, portName, 115200);
@@ -76,19 +76,18 @@ ToxiclibsSupport gfx;
     // translate everything to the middle of the viewport
     pushMatrix();
     // a tribute to world to processing transformation
-    translate(0,0,pos[1]); // x
+    translate(0,0,-pos[1]); // x
     translate(-pos[0],0,0); // y 
     translate(0,-pos[2],0); // z
     translate(width / 2, height / 2);
- //    rotateX(value[2]);   // MPU y  
- //    rotateY(-value[0]);  // MPU z
- //    rotateZ(value[1]);   // MPU x
-     // 3-step rotation from yaw/pitch/roll angles (gimbal lock!)
+     rotateY(-value[0]);  // MPU z  
+     rotateZ(value[1]);  // MPU ?
+     rotateX(value[2]);  // MPU ?
+      // 3-step rotation from yaw/pitch/roll angles (gimbal lock!)
     // ...and other weirdness I haven't figured out yet
-
-    rotateY(value[0]);
-    rotateZ(-value[1]);
-    rotateX(-value[2]);
+    //rotateY(-ypr[0]);
+    //rotateZ(-ypr[1]);
+    //rotateX(-ypr[2]);
     position();     
     drawbox();  
     popMatrix();
